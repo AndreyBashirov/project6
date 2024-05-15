@@ -104,7 +104,7 @@ void print_integrals(void){     //prints integrals of main
     print_del();
 }
 
-void print_iters(int num_a, int num_b, double a, double b){     //prints the number of iterations to find the root of (f1-f2 = 0, f2 - f3 = 0, f1 - f3 = 0)
+void print_iters(){     //prints the number of iterations to find the root of (f1-f2 = 0, f2 - f3 = 0, f1 - f3 = 0)
     num_of_iterations = 0;
     double root1 = root(0,6, f1, f3, eps);
     double num_of_iterations1 = num_of_iterations;
@@ -209,7 +209,7 @@ int main (int argc, char ** argv) {
             print_help_info();
             break;
         case 5: // count the iterations for calculating root
-            print_iters(f_a, f_b, a, b);
+            print_iters();
             break;
         case 6://find the point of intersection between two functions
             f_a = atoi(argv[cur_arg + 1]), f_b = atoi(argv[cur_arg + 2]);
