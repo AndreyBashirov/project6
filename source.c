@@ -161,7 +161,7 @@ void print_help_info(void){     //-help
     printf("to view value of integral on segment between roots use flag: -intergals\n");
     printf("to view answer use flag: -answer\n");
     printf("to view help information use flag: -help\n");
-    printf("to view number of iterations you need to calculate intersection use: -iters <number of first func> <number of second func> <left border> <right border>\n");
+    printf("to view number of iterations you need to use: -iters \n");
     printf("borders for functions from task:\n");
     printf("f1, f2: [ 0 , 6 ] \n");
     printf("f1, f3: [ 0 , 6 ] \n");
@@ -209,11 +209,6 @@ int main (int argc, char ** argv) {
             print_help_info();
             break;
         case 5: // count the iterations for calculating root
-            f_a = atoi(argv[cur_arg + 1]), f_b = atoi(argv[cur_arg + 2]);
-            a = atof(argv[cur_arg + 3]), b = atof(argv[cur_arg + 4]);
-            f_a--;
-            f_b--;
-            cur_arg += 4;
             print_iters(f_a, f_b, a, b);
             break;
         case 6://find the point of intersection between two functions
