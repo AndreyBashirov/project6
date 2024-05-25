@@ -5,7 +5,7 @@
 
 #define eps 0.001
 int num_of_iterations = 0;
-//num of iterations
+
 double f1(double x)
 {
     return (3 * (0.5/ (x + 1) + 1));
@@ -62,86 +62,88 @@ double integral(double x1, double x2, double (*func) (double), double eps2)  //f
 }
 
 //Sample
-double f4(double x)
+/*
+double f1(double x)
 {
     return (9 - (x - 3) * (x - 3));
 }
 
-double f5(double x)
+double f2(double x)
 {
     return (x - 3);
 }
 
-double f6(double x)
+double f3(double x)
 {
     return (3 - x);
 }
+*/
 
-double (*functions[6])(double) = {&f1, &f2, &f3, &f4, &f5, &f6};    //an array of functions
+double (*functions[6])(double) = {&f1, &f2, &f3, &f1, &f2, &f3};    //an array of functions
 
 void print_del(void){
     printf("------------------------------------------------------\n");
 }
 
 void print_roots(void){     //shows the points of intersection
-    double root1 = root(0,6, f1, f3, eps);
-    double root2 = root(0,6, f1, f2, eps);
-    double root3 = root(0,6, f2, f3, eps);
+    double root1 = root(0,6, f1, f3, 0.00001);
+    double root2 = root(0,6, f1, f2, 0.00001);
+    double root3 = root(0,6, f2, f3, 0.00001);
     print_del();
-    printf("root f1, f3: %lf\nroot f1, f2: %lf\nroot f2, f3: %lf\n", root1, root2, root3);
+    printf("root f1, f3: %.5lf\nroot f1, f2: %.5lf\nroot f2, f3: %.5lf\n", root1, root2, root3);
     print_del();
 }
 
 void print_integrals(void){     //prints integrals of main
-    double root1 = root(0,6, f1, f3, eps);
-    double root2 = root(0,6, f1, f2, eps);
-    double root3 = root(0,6, f2, f3, eps);
-    double I_f1 = integral(root1, root2, f1, eps);
-    double I_f2 = integral(root3, root2, f2, eps);
-    double I_f3 = integral(root1, root3, f3, eps);
+    double root1 = root(0,6, f1, f3, 0.00001);
+    double root2 = root(0,6, f1, f2, 0.00001);
+    double root3 = root(0,6, f2, f3, 0.00001);
+    double I_f1 = integral(root1, root2, f1, 0.0001);
+    double I_f2 = integral(root3, root2, f2, 0.0001);
+    double I_f3 = integral(root1, root3, f3, 0.0001);
     print_del();
-    printf("integral f1: %lf\nintegral f2: %lf\nintegral f3: %lf\n", I_f1, I_f2, I_f3);
+    printf("integral f1: %.4lf\nintegral f2: %.4lf\nintegral f3: %.4lf\n", I_f1, I_f2, I_f3);
     print_del();
 }
 
 void print_iters(){     //prints the number of iterations to find the root of (f1-f2 = 0, f2 - f3 = 0, f1 - f3 = 0)
     num_of_iterations = 0;
-    double root1 = root(0,6, f1, f3, eps);
+    double root1 = root(0,6, f1, f3, 0.00001);
     double num_of_iterations1 = num_of_iterations;
     num_of_iterations = 0;
-    double root2 = root(0,6, f1, f2, eps);
+    double root2 = root(0,6, f1, f2, 0.00001);
     double num_of_iterations2 = num_of_iterations;
     num_of_iterations = 0;
-    double root3 = root(0,6, f2, f3, eps);
+    double root3 = root(0,6, f2, f3, 0.00001);
     double num_of_iterations3 = num_of_iterations;
     num_of_iterations = 0;
     print_del();
-    printf("iters for root f1, f3: %lf\niters for root f1, f2: %lf\niters for root f2, f3: %lf\n", num_of_iterations1, num_of_iterations2, num_of_iterations3);
+    printf("iters for root f1, f3: %.1lf\niters for root f1, f2: %.1lf\niters for root f2, f3: %.1lf\n", num_of_iterations1, num_of_iterations2, num_of_iterations3);
     print_del();
 }
 
 void print_answer(void){        //prints the area of the shape between the curves
-    double root1 = root(0,6, f1, f3, eps);
-    double root2 = root(0,6, f1, f2, eps);
-    double root3 = root(0,6, f2, f3, eps);
-    double I_f1 = integral(root1, root2, f1, eps);
-    double I_f2 = integral(root3, root2, f2, eps);
-    double I_f3 = integral(root1, root3, f3, eps);
+    double root1 = root(0,6, f1, f3, 0.00001);
+    double root2 = root(0,6, f1, f2, 0.00001);
+    double root3 = root(0,6, f2, f3, 0.00001);
+    double I_f1 = integral(root1, root2, f1, 0.0001);
+    double I_f2 = integral(root3, root2, f2, 0.0001);
+    double I_f3 = integral(root1, root3, f3, 0.0001);
     double ans = I_f1 - I_f2 - I_f3;
     print_del();
-    printf("answer: %lf\n", ans);
+    printf("answer: %.3lf\n", ans);
     print_del();
 }
 
 void test_roots(int num_a, int num_b, double a, double b){      //shows the point of intersection of two functions
-    double cur_root = root(a,  b, functions[num_a], functions[num_b], eps);
+    double cur_root = root(a,  b, functions[num_a], functions[num_b], 0.00001);
     print_del();
     printf("intersection of f%d and f%d on [%lf, %lf] segment: %lf \n", num_a + 1, num_b + 1, a, b, cur_root);
     print_del();
 }
 
 void test_integrals(int num, double a, double b){       //calculate the integral on section
-    double cur_integral = integral(a, b, functions[num], eps);
+    double cur_integral = integral(a, b, functions[num], 0.0001);
     print_del();
     printf("value of integral of f%d on [%lf, %lf] segment: %lf \n", num + 1, a, b, cur_integral);
     print_del();
